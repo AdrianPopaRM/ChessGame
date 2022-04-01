@@ -11,6 +11,7 @@ public class GameBoard {
     }
     private void initializingGameBoard(){
         EntityColour colour1= EntityColour.BLACK;
+
         EntityColour colour2= EntityColour.WHITE;
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j+=2){
