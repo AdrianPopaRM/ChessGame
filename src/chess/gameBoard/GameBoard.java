@@ -1,26 +1,46 @@
 package chess.gameBoard;
 
 import chess.EntityColour;
+import chess.gamePieces.*;
+
+import java.util.Arrays;
 
 public class GameBoard {
     private GameBoardSquare[][] gameBoard=new GameBoardSquare[8][8];
 
 
     public GameBoard(){
+    }
+
+    public void game(){
         initializingGameBoard();
     }
     private void initializingGameBoard(){
-        EntityColour colour1= EntityColour.BLACK;
-
-        EntityColour colour2= EntityColour.WHITE;
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j+=2){
-                gameBoard[i][j]=new GameBoardSquare(colour1);
-                gameBoard[i][j+1]=new GameBoardSquare(colour2);
+        for(int rowIndex=0;rowIndex<8;rowIndex++) {
+            for (int columnIndex = 0; columnIndex < 8; columnIndex++) {
+                initializingGameBoardSquare(rowIndex, columnIndex);
             }
-            EntityColour aux= colour1;
-            colour1=colour2;
-            colour2=aux;
+        }
+        this.initializingGamePieces();
+    }
+
+    private void initializingGameBoardSquare(int rowIndex,int columnIndex){
+        if((rowIndex+columnIndex)%2==0){
+            gameBoard[rowIndex][columnIndex]=new GameBoardSquare(EntityColour.WHITE);
+        }
+        else{
+            gameBoard[rowIndex][columnIndex]=new GameBoardSquare(EntityColour.BLACK);
+        }
+    }
+
+    private void initializingGamePieces(){
+        for(EntityColour colour: EntityColour.values()){
+            Queen.initializeQueenPieces(colour,this.gameBoard);
+            King.initializeKingPieces(colour,this.gameBoard);
+            Rook.initializeRookPieces(colour,this.gameBoard);
+            Horse.initializeHorsePieces(colour,this.gameBoard);
+            Bishop.initializeBishopPieces(colour,this.gameBoard);
+            Pawn.initializePawnPieces(colour,this.gameBoard);
         }
     }
 }

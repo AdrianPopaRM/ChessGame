@@ -6,6 +6,7 @@ import java.util.Map;
 public interface ChessPiece {
     void move();
     EntityColour getColour();
-    Map<Integer, List<Integer>> getStartPosition(EntityColour colour);
+//    static Map<Integer, List<Integer>> getStartPosition(EntityColour colour);
+    int getCurrentLocation();
 }
 
